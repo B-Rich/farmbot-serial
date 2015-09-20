@@ -1,7 +1,20 @@
 require_relative 'lib/farmbot-serial'
 require 'pry'
+                  # Defaults to '/dev/ttyACM0', can be configured.
 
-bot = FB::Arduino.new(serial_port: FB::DefaultSerialPort.new('/dev/ttyUSB0')) # Defaults to '/dev/ttyACM0', can be configured.
+puts """
+Select a port, or press enter for '/dev/ttyACM0'
+1. /dev/ttyUSB0
+2. /dev/ttyACM0
+"""
+case gets.chomp
+when "1"
+  port = "/dev/ttyUSB0"
+else
+  port = "/dev/ttyACM0"
+end
+
+bot = FB::Arduino.new(serial_port: FB::DefaultSerialPort.new(port))
 
 puts """
 FARMBOT SERIAL SANDBOX. WELCOME!
