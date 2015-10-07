@@ -26,11 +26,15 @@ describe FB::OutgoingHandler do
     expect(bot.next_cmd.to_s).to eq("G0 X4 Y5 Z6")
   end
 
-  it 'never goes behind the 0 line' do
+  it 'never allows X / Y behind the 0 line' do
     handler.move_relative(x: -999, y: -999, z: -999)
     expect(bot.outbound_queue.first.value_of(:x)).to eq(0)
     expect(bot.outbound_queue.first.value_of(:y)).to eq(0)
-    expect(bot.outbound_queue.first.value_of(:z)).to eq(0)
+  end
+
+  it 'allows Z to be negative' do
+    handler.move_relative(z: -999)
+    expect(bot.outbound_queue.first.value_of(:z)).to eq(-999)
   end
 
   it 'Moves absolute' do
@@ -41,9 +45,14 @@ describe FB::OutgoingHandler do
     expect(bot.next_cmd.to_s).to eq("G0 X7 Y8 Z9")
   end
 
-  it 'Never goes farther than 0 when moving absolute' do
-    handler.move_absolute(x: -987, y: -654, z: -321)
+  it 'Never sends X/Y behind 0' do
+    handler.move_absolute(x: -987, y: -654, z: 0)
     expect(bot.next_cmd.to_s).to eq("G0 X0 Y0 Z0")
+  end
+
+  it 'sends Z to subzero coords' do
+    handler.move_absolute(x: 0, y: 0, z: -123)
+    expect(bot.next_cmd.to_s).to eq("G0 X0 Y0 Z-123")
   end
 
   it 'homes x, y, z, all' do

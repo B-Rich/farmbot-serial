@@ -22,7 +22,7 @@ module FB
         # every time the value is read. For this reason, we use ||= and not =.
         x1 ||= [(bot.current_position.x + (x || 0)), 0].max
         y1 ||= [(bot.current_position.y + (y || 0)), 0].max
-        z1 ||= [(bot.current_position.z + (z || 0)), 0].max
+        z1 ||= (bot.current_position.z + (z || 0)) || 0
 
         "G00 X#{x1} Y#{y1} Z#{z1}"
       end
@@ -31,7 +31,7 @@ module FB
     def move_absolute(x: 0, y: 0, z: 0, s: 100)
       x = [x.to_i, 0].max
       y = [y.to_i, 0].max
-      z = [z.to_i, 0].max
+      z = z.to_i || 0
       write { "G00 X#{x} Y#{y} Z#{z}" }
     end
 

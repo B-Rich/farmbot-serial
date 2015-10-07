@@ -50,10 +50,11 @@ module FB
       attr_reader :head, :tail
 
       def initialize(str)
-        nodes = str.scan(/\d+|\D+/) # ["R", "01"]
+        nodes = str.scan(/[a-zA-Z]+|\-?\d+/) # ["R", "-19"], ["Z", "4"]
+
         @head, @tail = nodes.shift.to_sym, nodes.join(" ")
         # Coerce to ints if possible, since serial line is all string types.
-        @tail = @tail.to_i if @tail.match(/^\d+$/)
+        @tail = @tail.to_i if @tail.match(/^\-?\d+$/)
       end
 
       def to_sym
