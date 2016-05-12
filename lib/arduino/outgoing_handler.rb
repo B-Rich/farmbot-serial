@@ -109,7 +109,7 @@ module FB
 
     def wait(ms)
       if (ms.is_a?(Integer))
-        write { "F44 P13 T#{ ms } M0 v1" }
+        write { "F44 T#{ ms }" }
       else
         raise BadNumericValue, "Expected sleep command to receive an integer."
       end
