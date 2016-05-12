@@ -107,11 +107,19 @@ module FB
       raise "Not yet implemented. TODO: This method."
     end
 
+    def wait(ms)
+      if (ms.is_a?(Integer))
+        write { "F44 P13 T#{ ms } M0 v1" }
+      else
+        raise BadNumericValue, "Expected sleep command to receive an integer."
+      end
+    end
+
   private
 
     class InvalidAxisEntry < Exception; end
     class BadBooleanValue < Exception; end
-
+    class BadNumericValue < Exception; end
     # The Arduino uses a different parameter number for each axis. Ex:
     # MOVEMENT_TIMEOUT_X is 11 and MOVEMENT_TIMEOUT_Y is 12. To keep things dry,
     # this method will lookup the correct paramater numer based on the axis
