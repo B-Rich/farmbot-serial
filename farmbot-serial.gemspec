@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "farmbot-serial"
-  spec.version       = '0.7.6'
+  spec.version       = '0.7.7'
   spec.authors       = ["Tim Evers", "Rick Carlino"]
   spec.email         = ["rick.carlino@gmail.com"]
   spec.description   = "Serial library for Farmbot"
