@@ -30,7 +30,7 @@ All REPL commands will be executed within the context of `bot.commands`.
 ## As an Application
 
 ```
-gem install farmbot-serial, '0.0.5'
+gem install farmbot-serial, '0.7.6'
 
 ```
 
@@ -70,4 +70,4 @@ To upgrade your ruby version, try this:
  curl -L https://get.rvm.io | bash -s stable --ruby
 ```
 
-This will take about 2 hours on a standard pi.
+This will take about 25 minutes on a pi3 and 2 hours on a pi2.
