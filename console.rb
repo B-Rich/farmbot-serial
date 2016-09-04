@@ -31,8 +31,8 @@ home_z
 home_all
 read_parameter(8)
 write_parameter('x', 0)
-pin_write(pin: 13, value: 1, mode: 0)
-pin_write(pin: 13, value: 0, mode: 0)
+write_pin(pin: 13, value: 1, mode: 0)
+write_pin(pin: 13, value: 0, mode: 0)
 read_status(8)
 """
 print "> "
